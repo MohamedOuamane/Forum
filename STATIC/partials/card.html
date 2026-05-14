@@ -1,0 +1,11 @@
+{{ define "card" }}
+<link rel="stylesheet" href="/STATIC/CSS/card.css"/>
+<div class="card" style="width: 18rem;">
+  <img src="{{ .Image }}" class="card-img-top" alt="Image">
+  <div class="card-body">
+    <h5 class="card-title">{{ .Name }}</h5>
+    <p class="card-text"></p>
+    <a href="{{.Link}}" class="btn btn-primary">Voir plus</a>
+  </div>
+</div>
+{{ end }}

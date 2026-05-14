@@ -1,0 +1,55 @@
+{{define "popupPost"}}
+<div id="postPopup" class="popup">
+  <div class="popup-content-post">
+    <span class="close" onclick="closePopup('postPopup')">&times;</span>
+    <h2>Post</h2>
+    <form method="POST" enctype="multipart/form-data" action="/post/action">
+      <input id="currentUrl" name="currentUrl" type="hidden" />
+      <input id="postId" name="postId" type="hidden" />
+      <input type="hidden" name="deletedImages" id="deletedImages" />
+      <label>Title: </label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        placeholder="Write title of your post"
+        required
+      />
+
+<div class="categories">
+  <p>Choose a category for your post:</p>
+  <div class="cat-btn">
+    {{range .Categories}}
+    <input
+      type="checkbox"
+      id="cat{{.Id}}"
+      name="selected_categories"
+      value="{{.Id}}"
+      hidden
+    />
+    <label for="cat{{.Id}}" class="category-btn">{{.Name}}</label>
+    {{end}}
+  </div>
+  <span id="categoryError" style="color: red; display: none;">Please select at least one category</span>
+</div>
+
+      <div id="container-img"></div>
+
+      <div class="Upload">
+        <input type="file" name="images" accept="image/*" multiple />
+      </div>
+
+      <textarea
+        id="content"
+        name="content"
+        placeholder="Write content of your post"
+        required
+      ></textarea>
+      {{/* value must be "3" to match case "3" in all handlers */}}
+      <button id="Publish" type="submit" name="action" value="create_post">
+        Publish
+      </button>
+    </form>
+  </div>
+</div>
+{{end}}

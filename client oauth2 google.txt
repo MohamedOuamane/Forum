@@ -1,0 +1,4 @@
+client oauth2 google
+
+ID client : placeholder
+code secret du client:placeholder

@@ -1,0 +1,37 @@
+{{define "header"}}
+<header class="h-wrap">
+  <div class="h-row">
+
+    <!-- Gauche : titre -->
+    <div class="h-left">
+      <nav><a class="titre" href="http://localhost:8080/home">Forum</a></nav>
+    </div>
+
+    <!-- Droite : icônes -->
+    <div class="h-right">
+      <div class="h-icons">
+        <button class="h-ic-btn h-notif">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+
+        {{if .LoggedIn}}
+          <a href="/profil/">
+            <button id="profile" class="h-btn">
+              <span class="material-symbols-outlined">account_circle</span>
+            </button>
+          </a>
+          <a href="/logout"><button id="logout" class="h-btn">➜]</button></a>
+        {{else}}
+          <button id="login" class="h-cta" onclick="openPopup('loginPopup')">
+            <span class="material-symbols-outlined">account_circle</span>
+          </button>
+        {{end}}
+
+      </div>
+    </div>
+
+  </div>
+</header>
+
+{{if .LoggedIn}} {{template "popupPost" .}} {{else}} {{template "popupLogin" .}}
+{{template "popupRegister" .}} {{end}} {{end}}

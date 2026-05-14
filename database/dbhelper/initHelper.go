@@ -1,0 +1,106 @@
+package forum
+
+import (
+	"database/sql"
+)
+
+func InitDb(db *sql.DB) error {
+	query := `PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS Roles(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL);
+	
+CREATE TABLE IF NOT EXISTS Users(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	role_id INTEGER NOT NULL,
+	username TEXT NOT NULL UNIQUE,
+	email TEXT NOT NULL UNIQUE,
+	password TEXT,
+	google_id TEXT UNIQUE,
+	github_id TEXT UNIQUE,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	avatar TEXT, 
+	FOREIGN KEY (role_id) REFERENCES Roles(id));
+	
+CREATE TABLE IF NOT EXISTS Categories(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	name TEXT NOT NULL,
+	logo TEXT);
+
+	
+CREATE TABLE IF NOT EXISTS Posts(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	title TEXT NOT NULL,
+	content TEXT NOT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (user_id) REFERENCES Users(id));
+	
+CREATE TABLE IF NOT EXISTS Comments(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	post_id INTEGER NOT NULL,
+	content TEXT NOT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (user_id) REFERENCES Users(id),
+	FOREIGN KEY (post_id) REFERENCES Posts(id));
+	
+CREATE TABLE IF NOT EXISTS Likes(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	post_id INTEGER ,
+	comment_id INTEGER,
+	value INTEGER,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (user_id) REFERENCES Users(id),
+	FOREIGN KEY (post_id) REFERENCES Posts(id),
+	FOREIGN KEY (comment_id) REFERENCES Comments(id));
+	
+CREATE TABLE IF NOT EXISTS Sessions(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	session_token TEXT NOT NULL UNIQUE,
+	expires_at DATETIME NOT NULL,
+	nb_connections INTEGER NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES Users(id));
+	
+CREATE TABLE IF NOT EXISTS Reports(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	user_id INTEGER NOT NULL,
+	post_id INTEGER NOT NULL,
+	subject TEXT NOT NULL,
+	content TEXT NOT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	resolved BOOLEAN NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES Users(id),
+	FOREIGN KEY (post_id) REFERENCES Posts(id));
+
+CREATE TABLE IF NOT EXISTS PostCategories (
+    post_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    PRIMARY KEY (post_id, category_id),
+    FOREIGN KEY (post_id) REFERENCES Posts(id),
+    FOREIGN KEY (category_id) REFERENCES Categories(id)
+);
+
+CREATE TABLE IF NOT EXISTS Permissions (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role_id INTEGER NOT NULL,
+	name TEXT NOT NULL,
+	actif BOOLEAN NOT NULL,
+	FOREIGN KEY (role_id) REFERENCES Roles(id)
+);
+
+CREATE TABLE IF NOT EXISTS Pictures (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	post_id INTEGER NOT NULL,
+	path TEXT NOT NULL,
+	position  INTEGER DEFAULT 0,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (post_id) REFERENCES Posts(id)
+);`
+
+	_, err := db.Exec(query)
+	return err
+}

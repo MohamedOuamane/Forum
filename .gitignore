@@ -1,0 +1,14 @@
+# database
+*.db
+*.sqlite
+*.sqlite3
+
+# node
+node_modules/
+
+# env
+.env
+#Upload file
+STATIC/uploads
+##test
+client oauth2 google.txtclient oauth2 google.txt

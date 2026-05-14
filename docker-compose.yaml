@@ -1,0 +1,21 @@
+services:
+  forum:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "8080:8080"
+
+    env_file:
+      - .env
+
+    volumes:
+      # Persistance SQLite
+      - ./database:/app/database
+
+      # Hot reload templates/static sans rebuild
+      - ./templates:/app/templates
+      - ./STATIC:/app/STATIC
+
+    restart: unless-stopped

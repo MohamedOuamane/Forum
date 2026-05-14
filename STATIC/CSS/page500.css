@@ -1,0 +1,75 @@
+/* ============================================
+   500.css – Styles specific to the 500 page
+   ============================================ */
+
+:root {
+  --error-from: #dc2626;  /* red   */
+  --error-to:   #ea580c;  /* orange */
+}
+
+/* Decorative diagonal background shape */
+main::before {
+  content: '';
+  position: absolute;
+  right: -80px;
+  bottom: -60px;
+  width: 520px;
+  height: 520px;
+  background: linear-gradient(
+    135deg,
+    rgba(220, 38,  38, 0.07),
+    rgba(234, 88,  12, 0.05)
+  );
+  clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+  pointer-events: none;
+}
+
+/* Error number gradient */
+.error-code {
+  background: linear-gradient(135deg, var(--error-from), var(--error-to));
+}
+
+/* Divider gradient */
+.divider {
+  background: linear-gradient(90deg, var(--error-from), var(--error-to));
+}
+
+/* Status card */
+.status-card {
+  margin-top: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  animation: fadeSlideDown 0.9s ease both;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--error-from);
+  flex-shrink: 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Override float opacity for 500 */
+.float-icon {
+  opacity: 0.4;
+}
+
+/* Float animation with slight rotation for 500 */
+@keyframes float {
+  0%, 100% { transform: translateY(0)      rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.5; transform: scale(1.3); }
+}

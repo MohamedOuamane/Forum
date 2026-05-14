@@ -1,0 +1,33 @@
+{{define "popupRegister"}}
+<div id="registerPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('registerPopup')">&times;</span>
+    <h2>Register</h2>
+    <form method="post">
+      <input id="name" name="name" type="text" placeholder="User Name" required>
+      <input id="email" name="email" type="email" placeholder="Email" required>
+      <div class="showpassword-reg">
+        <input id="password-reg" class="password" name="password" type="password" placeholder="Password" required>
+        <button id="showpassword-reg" type="button" onclick="togglePasswordReg()">👁</button>
+      </div>
+      {{if .RegisterError}}
+        <p style="color:red; margin-top:10px; text-align:center;">{{.RegisterError}}</p>
+      {{end}}
+      <button id="Register" type="submit" name="action" value="2">Register</button>
+      <br>
+      <button id="switchLogin" type="button" onclick="switchPopup('registerPopup','loginPopup')">
+        Already have an account?
+      </button>
+    </form>
+  </div>
+</div>
+
+{{/* Open register popup if server signals it (e.g. after failed registration) */}}
+{{if eq (index . "ShowRegister") true}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    openPopup("registerPopup");
+  });
+</script>
+{{end}}
+{{end}}

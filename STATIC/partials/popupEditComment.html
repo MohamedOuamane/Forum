@@ -1,0 +1,14 @@
+{{define "popupEditCom"}}
+<div id="EditComPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('EditComPopup')">&times;</span>
+    <h2>Edit</h2>
+    <form method="post">
+      
+      <input type="hidden" name="comment_ID" id="editCommentId">
+      <textarea id="NewComment" name="NewComment" required></textarea>
+      <button id="edit" type="submit" name="action" value="edit_comment">Confirm edit</button>
+    </form>
+  </div>
+</div>
+{{end}}

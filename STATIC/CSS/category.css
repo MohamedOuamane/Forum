@@ -1,0 +1,97 @@
+
+@font-face {
+    font-family: 'Guardian';
+    src: url('/STATIC/CSS/font/guardians/Guardians.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+.categories{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:10px 0;
+}
+
+.categories-menu{
+  display: flex;
+  flex-wrap:wrap;
+  gap:10px;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.category-btn-menu:hover {
+  transform: scale(1.1);
+}
+
+.category-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+  position: relative;
+  left: -9px;      /* Move left */
+}
+
+textarea{
+  width:100%;
+  min-height:120px;
+  resize:none;
+  margin-top:10px;
+}
+
+
+#title {
+  width: 490px;
+}
+
+.card-container {
+  display: grid;
+  place-items: center;
+  overflow-y: auto ;
+  overflow-x: hidden;
+  scrollbar-gutter: stable both-edges;
+  height: 100%;
+  max-height: 600px;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  border: solid rgb(185, 185, 185) 1px;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  background-color: rgb(245, 245, 245);
+}
+
+#limit {
+  border: solid black 1px;
+  width: 40%;
+  margin: auto;
+  border-radius: 100px;
+}
+h3 a.post-link {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+h3 a.post-link:visited,
+h3 a.post-link:hover,
+h3 a.post-link:active {
+  color: black;
+  text-decoration: none;
+}
+h3 a.Home-button:visited,
+h3 a.Home-button:hover,
+h3 a.Home-button:active {
+  color: black;
+  text-decoration: none;
+}
+h3 a.Home-button{
+  color: black !important;
+  text-decoration: none !important;
+}

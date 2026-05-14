@@ -1,0 +1,173 @@
+/* ============================================
+   errors.css – Shared styles for error pages
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:           #e8e8ea;
+  --surface:      #f0f0f2;
+  --border:       #d4d4d8;
+  --text:         #1a1a2e;
+  --muted:        #888899;
+  --accent-from:  #7c3aed;
+  --accent-to:    #2563eb;
+}
+
+/* ── Layout ── */
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Nav ── */
+nav {
+  padding: 18px 40px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+nav a {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--accent-from);
+  text-decoration: underline;
+  letter-spacing: -0.5px;
+}
+
+/* ── Main ── */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Error number ── */
+.error-code {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(7rem, 18vw, 11rem);
+  font-weight: 800;
+  line-height: 1;
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -4px;
+  animation: fadeSlideDown 0.6s ease both;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 20px 0;
+  animation: fadeSlideDown 0.7s ease both;
+}
+
+/* ── Heading ── */
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  animation: fadeSlideDown 0.75s ease both;
+}
+
+/* ── Description ── */
+p {
+  margin-top: 14px;
+  font-size: 1rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 420px;
+  line-height: 1.7;
+  animation: fadeSlideDown 0.85s ease both;
+}
+
+/* ── Buttons ── */
+.actions {
+  margin-top: 36px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeSlideDown 0.95s ease both;
+}
+
+.btn-primary {
+  padding: 12px 28px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  padding: 12px 28px;
+  border-radius: 9999px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-secondary:hover {
+  background: var(--border);
+  transform: translateY(-1px);
+}
+
+/* ── Floating emoji decorations ── */
+.float-icon {
+  font-size: 2.4rem;
+  position: absolute;
+  animation: float 5s ease-in-out infinite;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.float-icon:nth-child(1) { top: 18%;    left: 12%;  animation-delay: 0s; }
+.float-icon:nth-child(2) { top: 30%;    right: 10%; animation-delay: 1.2s; }
+.float-icon:nth-child(3) { bottom: 22%; left: 8%;   animation-delay: 2.4s; }
+
+/* ── Keyframes ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

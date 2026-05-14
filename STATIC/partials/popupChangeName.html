@@ -1,0 +1,41 @@
+{{define "popupChangeName"}}
+<div id="changeNamePopup" class="popup">
+  <div class="popup-content">
+
+    <span class="close" onclick="closePopup('changeNamePopup')">&times;</span>
+
+    <h2>Change Name</h2>
+
+    <form method="post">
+
+      <div class="input-group">
+        <input 
+          id="newName"
+          name="newName"
+          type="text"
+          placeholder="New Name"
+          value="{{.Username}}"
+          required
+        >
+      </div>
+
+      {{if .NameError}}
+        <p class="error-message" style="color:red; margin-top:10px; text-align:center;">{{.NameError}}</p>
+      {{end}}
+
+      <button type="submit" name="action" value="changeName">
+        Change Name
+      </button>
+
+    </form>
+  </div>
+</div>
+
+{{if .NameError}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    openPopup("changeNamePopup");
+  });
+</script>
+{{end}}
+{{end}}

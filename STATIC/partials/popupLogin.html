@@ -1,0 +1,81 @@
+{{define "popupLogin"}}
+<div id="loginPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('loginPopup')">&times;</span>
+    <h2 id="mustLogin">Login</h2>
+    <form method="post">
+      <input
+        id="name"
+        name="name"
+        type="text"
+        placeholder="User name or Email"
+        required
+      />
+      <div class="showpassword-log">
+        <input
+          id="password-log"
+          class="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+
+        <button
+          id="showpassword-log"
+          type="button"
+          onclick="togglePasswordLog()"
+        >
+          👁
+        </button>
+      </div>
+
+      {{if .LoginError}}
+      <p style="color: red; margin-top: 10px; text-align: center">
+        {{.LoginError}}
+      </p>
+      {{end}} {{if .SessionError}}
+      <p style="color: red; margin-top: 10px; text-align: center">
+        {{.SessionError}}
+      </p>
+      {{end}}
+      <div class="btn-alng">
+        <button id="connect" type="submit" name="action" value="1">
+          Connect
+        </button>
+        <br />
+        <button
+          id="switchRegister"
+          type="button"
+          onclick="switchPopup('loginPopup', 'registerPopup')"
+        >
+          Sign up
+        </button>
+      </form>
+      </div>
+    <div class="divider">
+  <span>OR</span>
+</div>
+      <div class="btn-alng1">
+
+        <form method="post" action="/login">
+          <button type="submit" class="oauth-btn">
+            <img src="/STATIC/icons/google.png" alt="Google Login" width="25" />
+          </button>
+        </form>
+    
+        <a href="/loginGithub" class="oauth-btn">
+          <img src="/STATIC/icons/github.jpg" alt="GitHub Login" width="34" />
+        </a>
+      </div>
+  </div>
+</div>
+
+{{/* Open popup automatically if server signals it via query params */}} {{if or
+.LoginError .ShowLogin}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    openPopup("loginPopup");
+  });
+</script>
+{{end}} {{end}}

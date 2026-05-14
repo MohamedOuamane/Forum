@@ -1,0 +1,15 @@
+{{define "popupAvatar"}}
+<div id="avatarPopup" class="popup">
+    <div class="popup-content-avatar">
+        <span class="close" onclick="closePopup('avatarPopup')">&times;</span>
+        <h2>Change Profile Picture</h2>
+        <form method="POST" action="/profil/" enctype="multipart/form-data">
+            <div class="avatar-preview">
+                <img id="avatarPreview" src="/STATIC/uploads/{{.AvatarPath}}" alt="avatar preview">
+            </div>
+            <input type="file" name="avatar" accept="image/*" id="avatarInput">
+            <button type="submit" name="action" value="ChangeAvatar">Save</button>
+        </form>
+    </div>
+</div>
+{{end}}

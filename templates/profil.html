@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+  <link rel="stylesheet" href="/STATIC/CSS/header.css" />
+  <link rel="stylesheet" href="/STATIC/CSS/profil.css"/>
+  <link rel="stylesheet" href="/STATIC/CSS/index.css"/>
+  <link rel="stylesheet" href="/STATIC/CSS/main.css"/>
+
+  <title>Forum Profil</title>
+</head>
+<body>
+    {{template "header" .}}
+    {{template "popupChangePassword" .}}
+    {{template "popupChangeName" .}}
+    
+    <div class="profil-layout">
+
+        <!-- Profil utilisateur -->
+        <div class="profile-container">
+            {{template "popupAvatar" .}}
+
+            <div class="avatar">
+                <img class="avatar-img" src="/STATIC/uploads/{{.AvatarPath}}" alt="avatar">
+                {{if eq .UserId .Id}}
+                <button onclick="openPopup('avatarPopup')">Change Avatar</button>
+                {{end}}
+            </div>
+
+            <div class="row">
+                <label>Username</label>
+                <div class="user">{{.Username}}</div>
+                 {{if eq .UserId .Id}}
+                <button onclick="openPopup('changeNamePopup')">Do you want to change Name?</button>
+                {{end}}
+            </div>
+             {{if eq .UserId .Id}}
+            <button id="change-password">Do you want to change password?</button>
+            {{end}}
+
+            <div class="row">
+                <label>E-mail</label>
+                <div class="user">{{.Email}}</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+
+            <div class="profile-tabs">
+                <button class="tab active" data-tab="posts">Posts</button>
+                <button class="tab" data-tab="comments">Comments</button>
+                <button class="tab" data-tab="likes">Likes-Posts</button>
+                <button class="tab" data-tab="likes-comments">Likes-Comments</button>
+            </div>
+
+            <!-- Posts -->
+            <div class="tab-content active" id="posts">
+                {{range .Posts}}
+                    <div class="post-card">
+                      <a href="/post/{{.Id}}">
+                        <h3>{{.Title}}</h3>
+                      </a>
+                        <p>{{.Content}}</p>
+                    </div>
+                {{else}}
+                    <p>Aucun post pour le moment</p>
+                {{end}}
+            </div>
+
+            <!-- Commentaires -->
+            <div class="tab-content" id="comments">
+                {{range .Comments}}
+                    <div class="comment-card">
+                      <a href="/post/{{.Post.Id}}">
+                        <p>{{.Content}}</p>
+                      </a>
+                    </div>
+                {{else}}
+                    <p>Aucun commentaire pour le moment</p>
+                {{end}}
+            </div>
+
+            <!-- Posts likés -->
+            <div class="tab-content" id="likes">
+                {{range .Likes}}
+                  <div class="like-card">
+                      <!-- Le titre est cliquable directement -->
+                      <a href="/post/{{.Id}}">
+                          <h3>{{.Title}}</h3>
+                      </a>
+                      <p>{{.Content}}</p>
+                  </div>
+                {{else}}
+                  <p>Aucun likes pour le moment</p>
+                {{end}}
+            </div>
+
+            <!-- Commentaires likés -->
+            <div class="tab-content" id="likes-comments">
+                {{range .LikedComments}}
+                  <div class="like-card">
+                      <a href="/post/{{.Post.Id}}">
+                          <h3>{{.Post.Title}}</h3>
+                      </a>
+                      <p><strong>Comments like :</strong> {{.Content}}</p>
+                  </div>
+                {{else}}
+                  <p>Aucun commentaire liké</p>
+                {{end}}
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="ft">
+      <div class="fti">
+        <nav class="ftn">
+          <a class="ftl" href="https://youtu.be/Aq5WXmQQooo?si=_8FlN71SiZjAcWfi"
+            >Contact</a
+          >
+        </nav>
+        <div class="ftc">
+          <span class="ftcp">© 2026 Forum. All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/STATIC/JS/profil.js"></script>
+    <script src="/STATIC/JS/PopUp.js"></script>
+    <script src="/STATIC/JS/Password.js"></script>
+    <script src="/STATIC/JS/Likes.js"></script>
+</body>
+</html>

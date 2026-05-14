@@ -1,0 +1,111 @@
+{{ define "post" }}
+<div class="card-post">
+  <div class="post-inner">
+    <!-- USER HEADER -->
+    <div class="user-info">
+      <div class="avatar-container">
+        <a href="/profil/{{.Post.User.Id}}" class="post-link">
+          <img
+            class="avatar-img"
+            src="/STATIC/uploads/{{.Post.User.Avatar}}"
+            alt="avatar"
+            width="50"
+            height="50"
+          />
+        </a>
+      </div>
+
+      <div class="username-container">
+        <a href="/profil/{{.Post.User.Id}}" class="post-link">
+          <h3 class="username">{{.Post.User.Username}}</h3>
+        </a>
+
+        <span class="date"
+          >Post created on {{.Post.Creation.Format "02/01/2006"}}
+        </span>
+      </div>
+
+      {{if eq .UserId .Post.User.Id}}
+      <div class="manage-post">
+        <form method="post">
+          <input type="hidden" name="postId" value="{{.Post.Id}}" />
+          <button
+            data-post-id="{{.Post.Id}}"
+            data-images="{{.ImagesString}}"
+            data-title="{{.Post.Title}}"
+            data-content="{{.Post.Content}}"
+            data-categories="{{.CategoriesString}}"
+            type="button"
+            class="edit"
+            onclick="openPopup('postPopup', 'edit', this)"
+          >
+            ✎
+          </button>
+        </form>
+
+        <form method="post">
+          <input type="hidden" name="postId" value="{{.Post.Id}}" />
+          <button
+            type="button"
+            onclick="openPopup('deleteModal', 'post', this)"
+            data-post-id="{{.Post.Id}}"
+          >
+            🗑
+          </button>
+        </form>
+      </div>
+      {{end}}
+    </div>
+
+    <!-- POST CONTENT -->
+    <a href="/post/{{.Post.Id}}" class="post-link">
+      <div class="post-info">
+        <div class="post-title">
+          <h3>{{.Post.Title}}</h3>
+        </div>
+
+        <div class="post-content">
+          <pre>{{.Post.Content}}</pre>
+        </div>
+
+        <div class="post-img-container">
+          {{range .Post.Images}}
+          <img
+            class="post-img"
+            src="/STATIC/uploads/{{.}}"
+            alt="post image"
+            width="300"
+            height="250"
+          />
+          {{end}}
+        </div>
+      </div>
+    </a>
+
+    <!-- ACTIONS -->
+    <div class="like-post">
+      <button
+        class="icon-btn like-btn"
+        data-post-id="{{.Post.Id}}"
+        data-user-id="{{.UserId}}"
+        data-action="like"
+        data-liked="{{if eq .UserLike 1}}true{{else}}false{{end}}"
+      >
+        👍
+        <span class="likeCount">{{.Post.Like}}</span>
+      </button>
+
+      <button
+        class="icon-btn dislike-btn"
+        data-post-id="{{.Post.Id}}"
+        data-user-id="{{.UserId}}"
+        data-action="dislike"
+        data-liked="{{if eq .UserLike -1}}true{{else}}false{{end}}"
+      >
+        👎
+        <span class="dislikeCount">{{.Post.Dislike}}</span>
+      </button>
+    </div>
+  </div>
+</div>
+{{end}}

@@ -1,0 +1,21 @@
+{{define "popupDelete"}}
+<div id="deleteModal" class="modal-overlay">
+  <div class="modal-content">
+    <p>Are you sure you want to delete it?</p>
+    <form id="deleteForm" method="post" action="/post/action">
+      <input id="deleteCurrentUrl" name="currentUrl" type="hidden" />
+      <input type="hidden" id="deleteTargetId" name="comment_id" value="" />
+      <button
+        type="submit"
+        id="yesDeleteBtn"
+        class="btn yes-btn"
+        name="action"
+        value="delete_comment"
+      >
+        Yes
+      </button>
+      <button type="button" id="noDeleteBtn" class="btn no-btn">No</button>
+    </form>
+  </div>
+</div>
+{{end}}

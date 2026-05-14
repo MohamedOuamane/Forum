@@ -1,0 +1,211 @@
+/* =========================
+   CARD BASE (bento style)
+========================= */
+
+.card-post {
+  width: 90%;
+  max-width: 700px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+
+  padding: 24px;
+  margin: 16px auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* inner layout */
+.post-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =========================
+   USER HEADER
+========================= */
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+
+  background: transparent;
+}
+
+.avatar-img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username-container h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  width: 50;
+}
+
+.username {
+  margin-right: 3%;
+  font-size: 16px;
+  font-weight: 600;
+}
+.username-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  color: #000000;
+}
+.date {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+.separator {
+  color: #9ca3af;
+}
+
+.date {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* =========================
+   MANAGE BUTTONS
+========================= */
+
+.manage-post {
+  margin-left: auto;
+
+  display: flex;
+  gap: 6px;
+
+  padding: 4px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+
+  background: #f9fafb;
+}
+
+.manage-post button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+/* =========================
+   POST CONTENT
+========================= */
+
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-title {
+  margin-bottom: 8px;
+  text-decoration: none;
+  color: black;
+  text-align: left;
+}
+
+.post-title h3 {
+  width: 110;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.post-content {
+  color: #374151;
+  white-space: preserve-spaces;
+  width: 100;
+  font-size: unset;
+  font-weight: bolder;
+}
+
+/* =========================
+   IMAGES
+========================= */
+
+.post-img-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+
+  scroll-snap-type: x mandatory;
+}
+.post-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.post-img {
+  flex: 0 0 100%;
+  min-width: 300px;
+
+  border-radius: 12px;
+  object-fit: cover;
+
+  scroll-snap-align: start;
+}
+
+/* =========================
+   LIKE / DISLIKE AREA
+========================= */
+
+.like-post {
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+
+  margin-top: 8px;
+}
+
+/* pill-style buttons (bento vibe) */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 12px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+
+  background: #fff;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: #f3f4f6;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 650px) {
+  .manage-post {
+    display: none !important;
+  }
+
+  .card-post {
+    border-radius: 16px;
+    padding: 16px;
+  }
+}

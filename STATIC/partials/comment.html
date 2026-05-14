@@ -1,0 +1,73 @@
+{{define "comment"}}
+
+<div class="comment-card">
+  <!-- HEADER -->
+  <div class="comment-header">
+    <img
+      class="user-avatar"
+      src="/STATIC/uploads/{{.Comment.User.Avatar}}"
+      alt="avatar"
+    />
+
+    <div class="comment-meta">
+      <div class="comment-top">
+        <strong class="comment-username"> {{.Comment.User.Username}} </strong>
+
+        <span class="comment-date">
+          {{.Comment.Creation.Format "02/01/2006"}}
+        </span>
+      </div>
+    </div>
+
+    {{if eq .UserId .Comment.User.Id}}
+    <div class="comment-actions">
+      <button
+        class="comment-action-btn edit-comment"
+        data-comment-id="{{.Comment.Id}}"
+        data-comment-content="{{.Comment.Content}}"
+      >
+        ✎
+      </button>
+
+      <button
+        class="comment-action-btn delete delete-comment"
+        data-comment-id="{{.Comment.Id}}"
+        data-post-id="{{.Comment.Post.Id}}"
+      >
+        🗑
+      </button>
+    </div>
+    {{end}}
+  </div>
+
+  <!-- CONTENT -->
+  <div class="comment-content">{{.Comment.Content}}</div>
+
+  <!-- FOOTER -->
+  <!-- FOOTER -->
+<div class="comment-footer">
+  <button
+    class="reaction-btn like-comment-btn"
+    data-comment-id="{{.Comment.Id}}"
+    data-post-id="{{.Comment.Post.Id}}"
+    data-user-id="{{.UserId}}"
+    data-action="like"
+    data-liked="{{if eq .Comment.UserLike 1}}true{{else}}false{{end}}"
+  >
+    👍 <span class="likeCommentCount">{{.Comment.Likes}}</span>
+  </button>
+
+  <button
+    class="reaction-btn dislike-comment-btn"
+    data-comment-id="{{.Comment.Id}}"
+    data-post-id="{{.Comment.Post.Id}}"
+    data-user-id="{{.UserId}}"
+    data-action="dislike"
+    data-liked="{{if eq .Comment.UserLike -1}}true{{else}}false{{end}}"
+  >
+    👎 <span class="dislikeCommentCount">{{.Comment.Dislikes}}</span>
+  </button>
+</div>
+</div>
+
+{{end}}

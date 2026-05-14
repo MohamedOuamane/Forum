@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/STATIC/CSS/header.css" />
+    <link rel="stylesheet" href="/STATIC/CSS/cardPost.css" />
+    <link rel="stylesheet" href="/STATIC/CSS/cardComment.css" />
+    <link rel="stylesheet" href="/STATIC/CSS/main.css" />
+    <title>Forum Post</title>
+  </head>
+  <body class="page">
+    {{template "header" .}} {{if .LoggedIn}} {{template "popupPost" .}} {{else}}
+    {{template "popupLogin" .}} {{template "popupRegister" .}} {{end}}
+    {{template "popupDelete" .}}
+
+    <main class="m">
+      <!-- LEFT SIDEBAR -->
+      <aside class="sd">
+        <div class="sdt">
+          <h2 class="sdt-h">Categories</h2>
+          <p class="sdt-p">Explore Interests</p>
+        </div>
+
+        <nav class="cl">
+          {{range .Categories}}
+          <a class="ci" href="/category/{{.Id}}">
+            {{if .Logo}}
+            <img src="/STATIC/{{.Logo}}" alt="category logo" class="clg" />
+            {{end}}
+            <span class="ci-t">{{.Name}}</span>
+          </a>
+          {{end}}
+        </nav>
+
+       {{if .LoggedIn}}
+        <button
+          id="post"
+          class="mt-8 gemini-gradient text-white py-3 px-6 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-transform active:scale-95 shadow-lg shadow-blue-200"
+          onclick="openPopup('postPopup', 'post')"
+        >
+        {{else}}
+        
+        <button
+          id="post"
+          class="mt-8 gemini-gradient text-white py-3 px-6 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-transform active:scale-95 shadow-lg shadow-blue-200"
+          onclick="openPopup('loginPopup', 'mustLogin')"
+        >
+        {{end}}
+          <span class="material-symbols-outlined">add_circle</span>
+          Create Post
+        </button>
+
+        <div class="sc">
+          <div class="sch">
+            <span class="sch-l">Active Now</span>
+            <span class="sch-dot"></span>
+          </div>
+          <p class="sc-p">{{.active}} Members online</p>
+        </div>
+      </aside>
+
+      <!-- CENTER CONTENT -->
+      <section class="ct">
+        <div class="card-container">
+          <div class="card">{{ template "post" .Post}}</div>
+          {{if .LoggedIn}}
+          <form method="post">
+            <div class="comment">
+              <textarea
+                id="CommentArea"
+                class="CommentArea"
+                name="Comment"
+                placeholder="Comment on our post"
+                required
+              ></textarea>
+
+              <button id="SendComment" type="submit" name="action" value="4">
+                ⌯⌲
+              </button>
+            </div>
+          </form>
+          {{else}}
+          <button
+            id="commentBtn"
+            class="comment-btn"
+            onclick="openPopup('loginPopup', 'mustLogin')"
+          >
+            <span class="material-symbols-outlined">comment</span>
+            Add Comment
+          </button>
+          {{end}}
+
+
+          <!-- Comments -->
+          <div class="Comments">
+            {{range .Comments}} {{template "comment" .}} {{end}}
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="rt">
+        <div class="news">
+          <h3>
+            <span class="material-symbols-outlined text-blue-500">
+              campaign
+            </span>
+            Forum News
+          </h3>
+
+          <div class="text-sm text-slate-600 space-y-3">
+            <p class="pb-3 border-b border-slate-200">
+              New Live Chat feature arrives soon stay in tune!
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-card tp">
+          <div class="posts-container" id="right">
+            <h2>Related Topics:</h2>
+
+            {{range .Posts}}
+            <div class="related-post">
+              <a href="/post/{{.Id}}" class="post-link"> {{.Title}} </a>
+
+              <div class="cards">
+                <p>{{.Content}}</p>
+              </div>
+            </div>
+            {{end}}
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="ft">
+      <div class="fti">
+        <nav class="ftn">
+          <a class="ftl" href="https://youtu.be/Aq5WXmQQooo?si=_8FlN71SiZjAcWfi"
+            >Contact</a
+          >
+        </nav>
+        <div class="ftc">
+          <span class="ftcp">© 2026 Forum. All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+    <script src="/STATIC/JS/Comment.js"></script>
+    <script src="/STATIC/JS/PopUp.js"></script>
+    <script src="/STATIC/JS/Password.js"></script>
+    <script src="/STATIC/JS/Likes.js"></script>
+    <script src="/STATIC/JS/Post.js"></script>
+  </body>
+</html>
