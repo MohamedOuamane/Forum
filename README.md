@@ -10,8 +10,8 @@ The project uses server-side rendering with Go templates and a lightweight front
 ## Features
 
 - User registration and login
-- Google OAuth authentication
-- GitHub OAuth authentication
+- Google OAuth authentication (note that you need to provide you own GOOGLE_CLIENT_ID= and GOOGLE_CLIENT_SECRET= for this to work)
+- GitHub OAuth authentication (note that you need to provide you own GITHUB_CLIENT_ID= and GITHUB_CLIENT_SECRET= for this to work)
 - Create and browse posts
 - Comment on posts
 - Like and dislike posts and comments
