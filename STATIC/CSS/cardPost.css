@@ -133,6 +133,13 @@
   width: 100;
   font-size: unset;
   font-weight: bolder;
+  overflow-wrap: anywhere;
+}
+.post-content pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  margin: 0;
 }
 
 /* =========================
